@@ -1,0 +1,99 @@
+import React, { useState } from "react";
+import { Calendar, dateFnsLocalizer } from "react-big-calendar";
+import format from "date-fns/format";
+import parse from "date-fns/parse";
+import startOfWeek from "date-fns/startOfWeek";
+import getDay from "date-fns/getDay";
+import "react-big-calendar/lib/css/react-big-calendar.css";
+
+const locales = {
+  "en-US": require("date-fns/locale/en-US"),
+};
+
+const localizer = dateFnsLocalizer({
+  format,
+  parse,
+  startOfWeek,
+  getDay,
+  locales,
+});
+
+const CalendarPage = () => {
+  const [events, setEvents] = useState([
+    {
+      id: 0,
+      title: "DJ Gig Sample Event",
+      start: new Date(),
+      end: new Date(),
+    },
+  ]);
+
+  const [newEvent, setNewEvent] = useState({
+    title: "",
+    start: "",
+    end: "",
+  });
+
+  const handleAddEvent = () => {
+    if (!newEvent.title || !newEvent.start || !newEvent.end) {
+      alert("Please fill all fields");
+      return;
+    }
+    setEvents([...events, { ...newEvent, id: events.length }]);
+    setNewEvent({ title: "", start: "", end: "" });
+  };
+
+  return (
+    <div className="p-6 max-w-5xl mx-auto">
+      <h1 className="text-3xl font-bold mb-6 text-center">DJ Booking Calendar</h1>
+
+      <div className="mb-6 flex flex-wrap gap-4 justify-center">
+        <input
+          type="text"
+          placeholder="Event Title"
+          className="border p-2 rounded w-64"
+          value={newEvent.title}
+          onChange={(e) =>
+            setNewEvent({ ...newEvent, title: e.target.value })
+          }
+        />
+        <input
+          type="datetime-local"
+          className="border p-2 rounded"
+          value={newEvent.start}
+          onChange={(e) =>
+            setNewEvent({ ...newEvent, start: new Date(e.target.value) })
+          }
+        />
+        <input
+          type="datetime-local"
+          className="border p-2 rounded"
+          value={newEvent.end}
+          onChange={(e) =>
+            setNewEvent({ ...newEvent, end: new Date(e.target.value) })
+          }
+        />
+        <button
+          onClick={handleAddEvent}
+          className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+        >
+          Add Event
+        </button>
+      </div>
+
+      <Calendar
+        localizer={localizer}
+        events={events}
+        startAccessor="start"
+        endAccessor="end"
+        style={{ height: 500 }}
+        selectable
+        onSelectEvent={(event) =>
+          alert(`Event: ${event.title}\nStart: ${event.start}\nEnd: ${event.end}`)
+        }
+      />
+    </div>
+  );
+};
+
+export default CalendarPage;

@@ -1,0 +1,5 @@
+DB_HOST=localhost
+DB_USER=root
+DB_PASSWORD=drupal
+DB_NAME=dj_app
+PORT=5001

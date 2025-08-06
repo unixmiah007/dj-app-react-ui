@@ -1,0 +1,103 @@
+import React, { useState, useEffect } from "react";
+
+const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+function Calendar() {
+  const [date, setDate] = useState(new Date());
+  const [selectedDate, setSelectedDate] = useState(null);
+
+  const year = date.getFullYear();
+  const month = date.getMonth();
+
+  // Get first day of month (0=Sun..6=Sat)
+  const firstDay = new Date(year, month, 1).getDay();
+
+  // Get total days in month
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+  // Create array for calendar days with leading empty slots
+  const calendarDays = [];
+
+  for (let i = 0; i < firstDay; i++) {
+    calendarDays.push(null);
+  }
+  for (let d = 1; d <= daysInMonth; d++) {
+    calendarDays.push(d);
+  }
+
+  const handlePrevMonth = () => {
+    setDate(new Date(year, month - 1));
+  };
+
+  const handleNextMonth = () => {
+    setDate(new Date(year, month + 1));
+  };
+
+  return (
+    <div className="max-w-md mx-auto p-6 bg-white shadow rounded">
+      <div className="flex items-center justify-between mb-4">
+        <button
+          onClick={handlePrevMonth}
+          className="text-indigo-600 hover:text-indigo-800 font-bold"
+        >
+          &lt; Prev
+        </button>
+        <h2 className="text-xl font-semibold text-gray-700">
+          {date.toLocaleString("default", { month: "long" })} {year}
+        </h2>
+        <button
+          onClick={handleNextMonth}
+          className="text-indigo-600 hover:text-indigo-800 font-bold"
+        >
+          Next &gt;
+        </button>
+      </div>
+
+      <div className="grid grid-cols-7 gap-1 text-center mb-2">
+        {daysOfWeek.map((day) => (
+          <div key={day} className="font-medium text-gray-600">
+            {day}
+          </div>
+        ))}
+      </div>
+
+      <div className="grid grid-cols-7 gap-1">
+        {calendarDays.map((day, idx) => {
+          const isToday =
+            day === new Date().getDate() &&
+            month === new Date().getMonth() &&
+            year === new Date().getFullYear();
+
+          const isSelected = day === selectedDate;
+
+          return (
+            <button
+              key={idx}
+              disabled={!day}
+              onClick={() => setSelectedDate(day)}
+              className={`h-10 rounded 
+                ${!day ? "" : "hover:bg-indigo-100"} 
+                ${isToday ? "bg-indigo-300 text-white" : ""}
+                ${isSelected ? "bg-indigo-600 text-white" : ""}
+                ${!day ? "cursor-default" : "cursor-pointer"}
+              `}
+            >
+              {day || ""}
+            </button>
+          );
+        })}
+      </div>
+
+      {selectedDate && (
+        <div className="mt-4 p-4 bg-indigo-50 rounded text-indigo-700">
+          Selected Date:{" "}
+          <strong>
+            {new Date(year, month, selectedDate).toLocaleDateString()}
+          </strong>
+        </div>
+      )}
+    </div>
+  );
+}
+
+export default Calendar;

@@ -1,0 +1,25 @@
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import CalendarPage from "./pages/Calendar";
+import BookingPage from "./pages/Booking";
+// other imports...
+
+function App() {
+  return (
+    <Router>
+      <nav className="bg-gray-800 p-4 text-white flex gap-4 justify-center">
+        <Link to="/" className="hover:underline">Home</Link>
+        <Link to="/about" className="hover:underline">About</Link>
+        <Link to="/calendar" className="hover:underline">Calendar</Link>
+        <Link to="/booking" className="hover:underline">Booking</Link>
+      </nav>
+
+      <Routes>
+        {/* existing routes */}
+          <Route path="/calendar" element={<CalendarPage />} />
+	  <Route path="/booking" element={<BookingPage />} />
+      </Routes>
+    </Router>
+  );
+}
+
+export default App;

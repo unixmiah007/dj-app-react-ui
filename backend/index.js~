@@ -1,0 +1,19 @@
+// Booking routes
+app.get("/bookings", (req, res) => {
+  db.query("SELECT * FROM bookings ORDER BY date DESC", (err, results) => {
+    if (err) return res.status(500).send(err);
+    res.json(results);
+  });
+});
+
+app.post("/bookings", (req, res) => {
+  const { name, email, date, message } = req.body;
+  db.query(
+    "INSERT INTO bookings (name, email, date, message) VALUES (?, ?, ?, ?)",
+    [name, email, date, message],
+    (err, result) => {
+      if (err) return res.status(500).send(err);
+      res.sendStatus(201);
+    }
+  );
+});
