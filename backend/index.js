@@ -23,7 +23,18 @@ db.connect((err) => {
   console.log("MySQL connected.");
 });
 
-// index.js (Express backend)
+
+// Format ISO string to MySQL DATETIME (YYYY-MM-DD HH:MM:SS)
+function formatToMySQLDatetime(dateString) {
+  const date = new Date(dateString);
+  const pad = (n) => (n < 10 ? "0" + n : n);
+
+  return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())} ` +
+         `${pad(date.getHours())}:${pad(date.getMinutes())}:${pad(date.getSeconds())}`;
+}
+
+
+// Get calendar events for FullCalendar (all bookings)
 app.get("/calendar-events", (req, res) => {
   db.query("SELECT id, name AS title, date AS start FROM bookings", (err, results) => {
     if (err) {
@@ -34,7 +45,7 @@ app.get("/calendar-events", (req, res) => {
     // Format results for FullCalendar
     const formatted = results.map(event => ({
       ...event,
-      allDay: true // Optional: treat as all-day events
+      allDay: true, // treat as all-day events
     }));
 
     res.json(formatted);
@@ -43,9 +54,9 @@ app.get("/calendar-events", (req, res) => {
 
 // GET all bookings
 app.get("/booking", (req, res) => {
-  db.query("SELECT * FROM bookings", (err, results) => {
+  db.query("SELECT * FROM bookings ORDER BY date ASC", (err, results) => {
     if (err) {
-      console.error("DB query error in /bookings:", err);
+      console.error("DB query error in GET /booking:", err);
       return res.status(500).json({ error: "Database query failed" });
     }
     res.json(results);
@@ -57,7 +68,7 @@ app.get("/booking/:id", (req, res) => {
   const { id } = req.params;
   db.query("SELECT * FROM bookings WHERE id = ?", [id], (err, results) => {
     if (err) {
-      console.error(`DB query error in GET /bookings/${id}:`, err);
+      console.error(`DB query error in GET /booking/${id}:`, err);
       return res.status(500).json({ error: "Database query failed" });
     }
     if (results.length === 0) {
@@ -69,19 +80,23 @@ app.get("/booking/:id", (req, res) => {
 
 // POST create new booking
 app.post("/booking", (req, res) => {
-  const { name, date, details } = req.body;
-  if (!name || !date) {
-    return res.status(400).json({ error: "Missing required fields: name, date" });
+  const { name, email, date, details } = req.body;
+
+  if (!name || !email || !date) {
+    return res.status(400).json({ error: "Missing required fields: name, email, date" });
   }
+
+  const formattedDate = formatToMySQLDatetime(date);
+
   db.query(
-    "INSERT INTO bookings (name, date, details) VALUES (?, ?, ?)",
-    [name, date, details || ""],
+    "INSERT INTO bookings (name, email, date, details) VALUES (?, ?, ?, ?)",
+    [name, email, formattedDate, details || ""],
     (err, result) => {
       if (err) {
-        console.error("DB query error in POST /bookings:", err);
+        console.error("DB query error in POST /booking:", err);
         return res.status(500).json({ error: "Database insert failed" });
       }
-      res.status(201).json({ id: result.insertId, name, date, details });
+      res.status(201).json({ id: result.insertId, name, email, date: formattedDate, details });
     }
   );
 });
@@ -98,7 +113,7 @@ app.put("/booking/:id", (req, res) => {
     [name, date, details || "", id],
     (err, result) => {
       if (err) {
-        console.error(`DB query error in PUT /bookings/${id}:`, err);
+        console.error(`DB query error in PUT /booking/${id}:`, err);
         return res.status(500).json({ error: "Database update failed" });
       }
       if (result.affectedRows === 0) {
@@ -114,7 +129,7 @@ app.delete("/booking/:id", (req, res) => {
   const { id } = req.params;
   db.query("DELETE FROM bookings WHERE id = ?", [id], (err, result) => {
     if (err) {
-      console.error(`DB query error in DELETE /bookings/${id}:`, err);
+      console.error(`DB query error in DELETE /booking/${id}:`, err);
       return res.status(500).json({ error: "Database delete failed" });
     }
     if (result.affectedRows === 0) {
