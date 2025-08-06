@@ -3,6 +3,9 @@ dj app for Bala Kuna / RTFM
 
 # 🎧 DJ Booking App
 
+<img width="1920" height="984" alt="image" src="https://github.com/user-attachments/assets/218c0319-a75e-4be6-914c-12feb7fbcc99" />
+<img width="1920" height="911" alt="image" src="https://github.com/user-attachments/assets/b9c0e27d-738b-4eba-9944-36745aaa2393" />
+
 A full-stack DJ booking website with a React frontend, Express.js backend, MySQL database, and calendar integration to manage bookings and gigs.
 
 ---
