@@ -1,5 +1,5 @@
 # dj-app
-dj app for Bala Kuna
+dj app for Bala Kuna / RTFM
 
 # 🎧 DJ Booking App
 
