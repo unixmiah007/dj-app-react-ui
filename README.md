@@ -1,5 +1,5 @@
 # dj-app
-dj app for Bala Kuna / RTFM
+dj app for Bala Kuna / RTFM (https://www.brownboiblue.com)
 
 # 🎧 DJ Booking App
 
