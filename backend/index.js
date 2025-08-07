@@ -33,6 +33,24 @@ function formatToMySQLDatetime(dateString) {
          `${pad(date.getHours())}:${pad(date.getMinutes())}:${pad(date.getSeconds())}`;
 }
 
+// DELETE route to delete a booking by ID
+app.delete("/booking/:id", async (req, res) => {
+  const { id } = req.params;
+  try {
+    const connection = await mysql.createConnection(dbConfig);
+    const [result] = await connection.execute("DELETE FROM bookings WHERE id = ?", [id]);
+    await connection.end();
+
+    if (result.affectedRows === 0) {
+      return res.status(404).send("Booking not found.");
+    }
+
+    res.sendStatus(200);
+  } catch (err) {
+    console.error("Error deleting booking:", err);
+    res.status(500).send("Error deleting booking.");
+  }
+});
 
 // Get calendar events for FullCalendar (all bookings)
 app.get("/calendar-events", (req, res) => {
