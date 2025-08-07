@@ -12,6 +12,11 @@ const Booking = () => {
   const [message, setMessage] = useState("");
   const [showForm, setShowForm] = useState(false);
 
+  // Pagination states
+  const [upcomingPage, setUpcomingPage] = useState(1);
+  const [pastPage, setPastPage] = useState(1);
+  const bookingsPerPage = 5;
+
   useEffect(() => {
     fetchBookings();
   }, []);
@@ -66,6 +71,16 @@ const Booking = () => {
   const today = new Date();
   const pastBookings = bookings.filter((b) => new Date(b.date) < today);
   const futureBookings = bookings.filter((b) => new Date(b.date) >= today);
+
+  // Pagination logic for upcoming
+  const upcomingIndexOfLast = upcomingPage * bookingsPerPage;
+  const upcomingIndexOfFirst = upcomingIndexOfLast - bookingsPerPage;
+  const currentUpcoming = futureBookings.slice(upcomingIndexOfFirst, upcomingIndexOfLast);
+
+  // Pagination logic for past
+  const pastIndexOfLast = pastPage * bookingsPerPage;
+  const pastIndexOfFirst = pastIndexOfLast - bookingsPerPage;
+  const currentPast = pastBookings.slice(pastIndexOfFirst, pastIndexOfLast);
 
   return (
     <div className="max-w-3xl mx-auto p-6">
@@ -126,13 +141,14 @@ const Booking = () => {
         <div className="mt-4 p-3 bg-green-100 text-green-800 rounded">{message}</div>
       )}
 
+      {/* Upcoming Bookings */}
       <div className="mt-8">
         <h2 className="text-2xl font-semibold mb-3">Upcoming Bookings</h2>
-        {futureBookings.length === 0 ? (
+        {currentUpcoming.length === 0 ? (
           <p>No upcoming bookings.</p>
         ) : (
           <ul className="space-y-2">
-            {futureBookings.map((b) => (
+            {currentUpcoming.map((b) => (
               <li key={b.id} className="border p-3 rounded bg-white">
                 <p><strong>Name:</strong> {b.name}</p>
                 <p><strong>Email:</strong> {b.email}</p>
@@ -149,12 +165,33 @@ const Booking = () => {
           </ul>
         )}
 
-        <h2 className="text-2xl font-semibold mt-6 mb-3">Past Bookings</h2>
-        {pastBookings.length === 0 ? (
+        {/* Pagination for Upcoming */}
+        <div className="flex justify-between mt-4">
+          <button
+            disabled={upcomingPage === 1}
+            onClick={() => setUpcomingPage(upcomingPage - 1)}
+            className={`px-4 py-2 rounded ${upcomingPage === 1 ? "bg-gray-300 cursor-not-allowed" : "bg-blue-600 text-white hover:bg-blue-700"}`}
+          >
+            Previous
+          </button>
+          <button
+            disabled={upcomingIndexOfLast >= futureBookings.length}
+            onClick={() => setUpcomingPage(upcomingPage + 1)}
+            className={`px-4 py-2 rounded ${upcomingIndexOfLast >= futureBookings.length ? "bg-gray-300 cursor-not-allowed" : "bg-blue-600 text-white hover:bg-blue-700"}`}
+          >
+            Next
+          </button>
+        </div>
+      </div>
+
+      {/* Past Bookings */}
+      <div className="mt-8">
+        <h2 className="text-2xl font-semibold mb-3">Past Bookings</h2>
+        {currentPast.length === 0 ? (
           <p>No past bookings.</p>
         ) : (
           <ul className="space-y-2">
-            {pastBookings.map((b) => (
+            {currentPast.map((b) => (
               <li key={b.id} className="border p-3 rounded bg-gray-50">
                 <p><strong>Name:</strong> {b.name}</p>
                 <p><strong>Email:</strong> {b.email}</p>
@@ -170,6 +207,24 @@ const Booking = () => {
             ))}
           </ul>
         )}
+
+        {/* Pagination for Past */}
+        <div className="flex justify-between mt-4">
+          <button
+            disabled={pastPage === 1}
+            onClick={() => setPastPage(pastPage - 1)}
+            className={`px-4 py-2 rounded ${pastPage === 1 ? "bg-gray-300 cursor-not-allowed" : "bg-blue-600 text-white hover:bg-blue-700"}`}
+          >
+            Previous
+          </button>
+          <button
+            disabled={pastIndexOfLast >= pastBookings.length}
+            onClick={() => setPastPage(pastPage + 1)}
+            className={`px-4 py-2 rounded ${pastIndexOfLast >= pastBookings.length ? "bg-gray-300 cursor-not-allowed" : "bg-blue-600 text-white hover:bg-blue-700"}`}
+          >
+            Next
+          </button>
+        </div>
       </div>
     </div>
   );

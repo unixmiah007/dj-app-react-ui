@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { FaInstagram, FaSpotify, FaApple, FaSoundcloud, FaXTwitter } from 'react-icons/fa6';
+import { FaGithub } from 'react-icons/fa';
 
 const Home = () => {
   const [formData, setFormData] = useState({
@@ -16,7 +18,7 @@ const Home = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch('http://localhost:5000/api/newsletter', {
+      const res = await fetch('http://localhost:5001/api/newsletter', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
@@ -36,6 +38,26 @@ const Home = () => {
       
       {/* Left column: text + form */}
       <div className="flex-1 space-y-6 text-center lg:text-left">
+
+        {/* Social Icons */}
+        <div className="flex justify-center lg:justify-start space-x-4 mb-4 text-2xl text-blue-600">
+          <a href="https://www.instagram.com/brownboiblue" target="_blank" rel="noopener noreferrer">
+            <FaInstagram />
+          </a>
+          <a href="https://open.spotify.com/artist/2kIqscPQnM71I0vLQ5y8uH" target="_blank" rel="noopener noreferrer">
+            <FaSpotify />
+          </a>
+          <a href="https://music.apple.com/us/artist/brownboiblue/1685829162" target="_blank" rel="noopener noreferrer">
+            <FaApple />
+          </a>
+          <a href="https://soundcloud.com/brownboiblue" target="_blank" rel="noopener noreferrer">
+            <FaSoundcloud />
+          </a>
+          <a href="https://x.com/brownboiblue" target="_blank" rel="noopener noreferrer">
+            <FaXTwitter />
+          </a>
+        </div>
+
         <h1 className="text-4xl font-bold">BrownBoiBlue Music</h1>
         <p className="text-lg">
           EDM music producer.<br />
@@ -84,33 +106,6 @@ const Home = () => {
             Thank you! We’ve received your information and will get back to you shortly.
           </div>
         )}
-
-        <div className="mt-6 space-x-4">
-          <a
-            href="https://soundcloud.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-blue-500 hover:underline"
-          >
-            SoundCloud
-          </a>
-          <a
-            href="https://instagram.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-blue-500 hover:underline"
-          >
-            Instagram
-          </a>
-          <a
-            href="https://open.spotify.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-blue-500 hover:underline"
-          >
-            Spotify
-          </a>
-        </div>
       </div>
 
       {/* Right column: image */}
