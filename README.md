@@ -89,7 +89,7 @@ npm run dev     # Start backend with nodemon for live reload
 npm start       # Run frontend in development mode
 npm run build   # Build production-ready frontend
 
-Sure! Here's a detailed **README.md** tailored for deploying your React + Express + MySQL app on Amazon AWS (EC2):
+How to deploy to server:
 
 ````markdown
 # React + Express + MySQL App Deployment on AWS EC2
