@@ -46,23 +46,23 @@ const Home = () => {
         />
 
         {/* Social Icons */}
-<div className="flex justify-center lg:justify-start space-x-4 mb-4 text-2xl text-amber-800">
-  <a href="https://www.instagram.com/brownboiblue" target="_blank" rel="noopener noreferrer" className="hover:text-amber-900 transition-colors duration-200">
-    <FaInstagram />
-  </a>
-  <a href="https://open.spotify.com/artist/2kIqscPQnM71I0vLQ5y8uH" target="_blank" rel="noopener noreferrer" className="hover:text-amber-900 transition-colors duration-200">
-    <FaSpotify />
-  </a>
-  <a href="https://music.apple.com/us/artist/brownboiblue/1685829162" target="_blank" rel="noopener noreferrer" className="hover:text-amber-900 transition-colors duration-200">
-    <FaApple />
-  </a>
-  <a href="https://soundcloud.com/brownboiblue" target="_blank" rel="noopener noreferrer" className="hover:text-amber-900 transition-colors duration-200">
-    <FaSoundcloud />
-  </a>
-  <a href="https://x.com/brownboiblue" target="_blank" rel="noopener noreferrer" className="hover:text-amber-900 transition-colors duration-200">
-    <FaXTwitter />
-  </a>
-</div>
+        <div className="flex justify-center lg:justify-start space-x-4 mb-4 text-2xl text-amber-800">
+          <a href="https://www.instagram.com/brownboiblue" target="_blank" rel="noopener noreferrer" className="hover:text-amber-900 transition-colors duration-200">
+            <FaInstagram />
+          </a>
+          <a href="https://open.spotify.com/artist/2kIqscPQnM71I0vLQ5y8uH" target="_blank" rel="noopener noreferrer" className="hover:text-amber-900 transition-colors duration-200">
+            <FaSpotify />
+          </a>
+          <a href="https://music.apple.com/us/artist/brownboiblue/1685829162" target="_blank" rel="noopener noreferrer" className="hover:text-amber-900 transition-colors duration-200">
+            <FaApple />
+          </a>
+          <a href="https://soundcloud.com/brownboiblue" target="_blank" rel="noopener noreferrer" className="hover:text-amber-900 transition-colors duration-200">
+            <FaSoundcloud />
+          </a>
+          <a href="https://x.com/brownboiblue" target="_blank" rel="noopener noreferrer" className="hover:text-amber-900 transition-colors duration-200">
+            <FaXTwitter />
+          </a>
+        </div>
 
         <p className="text-lg">
           EDM music producer.<br />

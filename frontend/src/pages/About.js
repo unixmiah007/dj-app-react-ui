@@ -132,17 +132,16 @@ const About = () => {
       {/* Content Section */}
       <div className="max-w-3xl mx-auto">
         <p className="mb-4 text-gray-700 text-lg leading-relaxed">
-          DJ Blue started spinning records in 2010, quickly gaining a reputation
-          for eclectic sets that blend classic grooves with modern sounds.
+          <span className="font-semibold text-gray-800">From vinyl crates to digital decks, DJ Blue's journey began in 2010 with a revolutionary vision:</span> to bridge the gap between timeless classics and cutting-edge beats. What started as late-night sessions perfecting the art of seamless transitions quickly evolved into something extraordinary—a signature sound that transforms dance floors into sonic time machines.
         </p>
         <p className="mb-4 text-gray-700 text-lg leading-relaxed">
-          Over the years, DJ Blue has performed at over 200 events worldwide,
-          captivating audiences with impeccable mixing skills and energetic
-          performances.
+          <span className="font-semibold text-gray-800">With over 200 electrifying performances spanning continents, DJ Blue has become synonymous with unforgettable nights and euphoric crowds.</span> From intimate underground venues to massive festival stages, each set is meticulously crafted to take listeners on an emotional rollercoaster, weaving together unexpected musical narratives that leave audiences craving more.
         </p>
-        <p className="mb-6 text-gray-600 text-lg leading-relaxed">
-          Passionate about music, creativity, and connecting with people, DJ Blue
-          continues to push boundaries and redefine the party experience.
+        <p className="mb-4 text-gray-700 text-lg leading-relaxed">
+          <span className="font-semibold text-gray-800">But DJ Blue isn't just about the music—it's about creating moments that transcend the ordinary.</span> Armed with an infectious passion for human connection and an unwavering commitment to artistic innovation, DJ Blue doesn't just play tracks; they curate experiences, craft memories, and ignite something magical in every room they enter. This is more than DJing—this is musical alchemy at its finest.
+        </p>
+        <p className="mb-6 text-purple-700 text-lg leading-relaxed font-medium">
+          <span className="text-xl">🎵</span> The mission? To shatter expectations, blur genre boundaries, and prove that when the right beats meet the right moment, pure magic happens.
         </p>
 
         {/* Audio Player - Replace with actual audio URL */}
