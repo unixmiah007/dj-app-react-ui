@@ -13,7 +13,7 @@ export default function CalendarPage() {
     // Fetch bookings from backend API
     const fetchBookings = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/booking");
+        const res = await axios.get("http://localhost:5002/booking");
         // Map backend data to FullCalendar event format
         const calendarEvents = res.data.map((booking) => ({
           id: booking.id,

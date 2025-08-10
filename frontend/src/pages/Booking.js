@@ -23,7 +23,7 @@ const Booking = () => {
 
   const fetchBookings = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/booking");
+      const res = await axios.get("http://localhost:5002/booking");
       setBookings(res.data);
     } catch (err) {
       console.error("Failed to load bookings:", err);
@@ -33,7 +33,7 @@ const Booking = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:5000/booking", {
+      await axios.post("http://localhost:5002/booking", {
         name,
         email,
         date: date.toISOString().slice(0, 19).replace("T", " "),

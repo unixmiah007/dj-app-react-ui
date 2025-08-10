@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FaInstagram, FaSpotify, FaApple, FaSoundcloud, FaXTwitter } from 'react-icons/fa6';
-import { FaGithub } from 'react-icons/fa';
+import Logo from './assets/brownboiblue-logo.png'; // <-- Add your logo file path here
 
 const Home = () => {
   const [formData, setFormData] = useState({
@@ -36,29 +36,34 @@ const Home = () => {
   return (
     <div className="max-w-4xl mx-auto p-6 flex flex-col lg:flex-row items-center lg:items-start gap-6">
       
-      {/* Left column: text + form */}
+      {/* Left column: logo + text + form */}
       <div className="flex-1 space-y-6 text-center lg:text-left">
+        {/* Logo instead of text */}
+        <img 
+          src={Logo} 
+          alt="BrownBoiBlue Music" 
+          className="mx-auto lg:mx-0 max-w-xs md:max-w-sm" 
+        />
 
         {/* Social Icons */}
-        <div className="flex justify-center lg:justify-start space-x-4 mb-4 text-2xl text-blue-600">
-          <a href="https://www.instagram.com/brownboiblue" target="_blank" rel="noopener noreferrer">
-            <FaInstagram />
-          </a>
-          <a href="https://open.spotify.com/artist/2kIqscPQnM71I0vLQ5y8uH" target="_blank" rel="noopener noreferrer">
-            <FaSpotify />
-          </a>
-          <a href="https://music.apple.com/us/artist/brownboiblue/1685829162" target="_blank" rel="noopener noreferrer">
-            <FaApple />
-          </a>
-          <a href="https://soundcloud.com/brownboiblue" target="_blank" rel="noopener noreferrer">
-            <FaSoundcloud />
-          </a>
-          <a href="https://x.com/brownboiblue" target="_blank" rel="noopener noreferrer">
-            <FaXTwitter />
-          </a>
-        </div>
+<div className="flex justify-center lg:justify-start space-x-4 mb-4 text-2xl text-amber-800">
+  <a href="https://www.instagram.com/brownboiblue" target="_blank" rel="noopener noreferrer" className="hover:text-amber-900 transition-colors duration-200">
+    <FaInstagram />
+  </a>
+  <a href="https://open.spotify.com/artist/2kIqscPQnM71I0vLQ5y8uH" target="_blank" rel="noopener noreferrer" className="hover:text-amber-900 transition-colors duration-200">
+    <FaSpotify />
+  </a>
+  <a href="https://music.apple.com/us/artist/brownboiblue/1685829162" target="_blank" rel="noopener noreferrer" className="hover:text-amber-900 transition-colors duration-200">
+    <FaApple />
+  </a>
+  <a href="https://soundcloud.com/brownboiblue" target="_blank" rel="noopener noreferrer" className="hover:text-amber-900 transition-colors duration-200">
+    <FaSoundcloud />
+  </a>
+  <a href="https://x.com/brownboiblue" target="_blank" rel="noopener noreferrer" className="hover:text-amber-900 transition-colors duration-200">
+    <FaXTwitter />
+  </a>
+</div>
 
-        <h1 className="text-4xl font-bold">BrownBoiBlue Music</h1>
         <p className="text-lg">
           EDM music producer.<br />
           Techno, house, and bass music. <em>Think global, dance local.</em>
