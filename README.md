@@ -2,7 +2,7 @@
 dj app for Bala Kuna / RTFM (https://www.brownboiblue.com)
 
 # 🎧 DJ Booking App
-
+<img width="3024" height="3386" alt="image" src="https://github.com/user-attachments/assets/80ecb676-3b80-4d7d-9f15-4f68af840505" />
 <img width="1920" height="984" alt="image" src="https://github.com/user-attachments/assets/218c0319-a75e-4be6-914c-12feb7fbcc99" />
 <img width="1920" height="911" alt="image" src="https://github.com/user-attachments/assets/b9c0e27d-738b-4eba-9944-36745aaa2393" />
 
